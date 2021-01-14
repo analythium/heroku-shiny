@@ -20,4 +20,12 @@ server <- function(input, output) {
         cat("Size of", input$file$name, "=",
             round(input$file$size/1024^2, 3), "MB")
     })
+
+    ## prevent timeout
+    autoInvalidate <- reactiveTimer(intervalMs = 50*1000)
+    observe({
+        autoInvalidate()
+        cat(".")
+    })
+
 }

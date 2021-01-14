@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN install.r shiny rmarkdown intrval
 
-# create non rrot user
+# create non root user
 RUN addgroup --system app \
     && adduser --system --ingroup app app
 
