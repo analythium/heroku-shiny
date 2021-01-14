@@ -27,9 +27,9 @@ RUN chown app:app -R /home/app
 USER app
 
 # EXPOSE can be used for local testing, not supported in Heroku's container runtime
-#EXPOSE 8080
+EXPOSE 8080
 
 # web process/code should get the $PORT environment variable
-#ENV PORT=8080
+ENV PORT=8080
 
-CMD ["R", "-e", "shiny::runApp('/home/app', host = '0.0.0.0', port=Sys.getenv('PORT'))"]
+CMD ["R", "-e", "shiny::runApp('/home/app', host = '0.0.0.0', port=as.numeric(Sys.getenv('PORT')))"]
