@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssh2-1-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN install.r shiny rmarkdown intrval
+RUN install2.r -e remotes renv
 
 # create non root user
 RUN addgroup --system app \
@@ -21,6 +21,10 @@ RUN addgroup --system app \
 WORKDIR /home/app
 
 COPY app .
+
+COPY ./renv.lock .
+RUN Rscript -e "renv::restore(lockfile = '/home/app/renv.lock', repos = c(CRAN = 'https://cloud.r-project.org'), library = '/usr/local/lib/R/site-library', prompt = FALSE)"
+RUN rm -f renv.lock
 
 RUN chown app:app -R /home/app
 
