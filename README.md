@@ -19,7 +19,16 @@ Note: Shiny apps [time out after 55 seconds](https://devcenter.heroku.com/articl
 > Similarly, if no data is received from the client within the 55 second window, the connection is terminated and an H28 error is logged.
 
 A workaround was posted on [SO](https://stackoverflow.com/questions/54594781/how-to-prevent-a-shiny-app-from-being-grayed-out) to print a dot to the console every passage of 10 seconds. 
-A counter set at 50 seconds interval is added to `/app/server.R`.
+A counter set at 50 seconds interval is added to `/app/server.R`:
+
+```R
+## prevent timeout
+autoInvalidate <- reactiveTimer(intervalMs = 50*1000)
+observe({
+    autoInvalidate()
+    cat(".")
+})
+```
 
 The following deployment options are explained here:
 

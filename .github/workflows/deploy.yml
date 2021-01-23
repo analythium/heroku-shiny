@@ -15,14 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache packages
-        uses: actions/cache@v1
-        with:
-          path: $HOME/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
-
       - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
         uses: gonuit/heroku-docker-deploy@v1.1.0 # GitHub action name (leave it as it is).
         with:
