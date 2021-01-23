@@ -10,7 +10,7 @@ Workflow:
 The `/app` folder contains the shiny app. The demo app was taken from here:
 https://github.com/analythium/shinyproxy-demo
 
-Note, Shiny apps [time out after 55 seconds](https://devcenter.heroku.com/articles/limits#http-timeouts):
+Note: Shiny apps [time out after 55 seconds](https://devcenter.heroku.com/articles/limits#http-timeouts):
 
 > After the initial response, each byte sent from the server restarts a rolling 55 second window. A similar 55 second window is restarted for every byte sent from the client.
 >
@@ -23,8 +23,8 @@ A counter set at 50 seconds interval is added to `/app/server.R`.
 
 The following deployment options are explained here:
 
-1. [Using GitHub actions](#using-github-actions)
-2. [Using local Heroku CLI](#using-local-heroku-cli)
+- [Using GitHub actions](#using-github-actions)
+- [Using local Heroku CLI](#using-local-heroku-cli)
 
 ## Deployment using GitHub actions
 
