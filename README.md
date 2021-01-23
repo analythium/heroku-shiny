@@ -26,7 +26,7 @@ The following deployment options are explained here:
 1. [Using GitHub actions](#using-github-actions)
 2. [Using local Heroku CLI](#using-local-heroku-cli)
 
-## Using GitHub actions
+## Deployment using GitHub actions
 
 Log into Heroku, in the dashboard, click on 'New' then select 'Create new App'.
 Give a name (e.g. `shiny-cicd`, if available, this will create the app at https://shiny-cicd.herokuapp.com/) to the app and create the app.
@@ -41,7 +41,7 @@ following new repository secrets:
 See the `.github/workflows/deploy.yml` file for additional options
 (`dockerfile_name`, `docker_options`, `dockerfile_directory`)
 
-## Using local Heroku CLI
+## Deployment using local Heroku CLI
 
 ### Prerequisites
 
@@ -70,29 +70,7 @@ The Dockerfile defines system requirements, R package dependencies.
 ```Dockerfile
 FROM rocker/r-base:latest
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    sudo \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
-    libssl-dev \
-    libssh2-1-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN install.r shiny rmarkdown intrval
-
-RUN addgroup --system app \
-    && adduser --system --ingroup app app
-
-WORKDIR /home/app
-
-COPY app .
-
-RUN chown app:app -R /home/app
-
-USER app
-
-EXPOSE 8080
+...
 
 ENV PORT=8080
 
@@ -147,7 +125,7 @@ heroku open
 
 https://morning-springs-64281.herokuapp.com/
 
-### Local testing
+### Test the Docker container locally
 
 To build the image from the Dockerfile, run:
 
@@ -155,11 +133,11 @@ To build the image from the Dockerfile, run:
 sudo docker build -t analythium/heroku-demo .
 ```
 
-Test locally:
+Test:
 
 ```bash
 docker run -p 4000:8080 analythium/heroku-demo
 ```
 then visit `127.0.0.1:4000`.
 
-(c) Copyright Analythium Solutions Inc, 2021 (MIT).
+(c) Copyright [Analythium Solutions Inc.](https://analythium.io), 2021 (MIT).
