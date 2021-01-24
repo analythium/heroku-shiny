@@ -1,6 +1,6 @@
 # Heroku deployment examples
 
-Workflow:
+Workflow (works with public and privare repositories):
 
 - start with this template or modify your app taking this as an example
 - run `renv::init()` or `renv::snapshot()` to capture dependencies in the `renv.lock` file
@@ -56,7 +56,7 @@ See the `.github/workflows/deploy.yml` file for additional options
 
 - Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 - R & Shiny
-- Docker
+- Docker Engine installed & a Docker Hub account
 
 ### Building Docker Images with heroku.yml
 
