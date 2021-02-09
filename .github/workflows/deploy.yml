@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
-        uses: psolymos/heroku-docker-deploy@v1.2.1 # GitHub action name (leave it as it is).
+        uses: psolymos/heroku-docker-deploy@v1.2.2 # GitHub action name (leave it as it is).
         with:
 
           # The email address associated with your Heroku account.
