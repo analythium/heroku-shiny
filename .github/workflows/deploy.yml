@@ -17,7 +17,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Change directory
-        run: cd project
+        #run: cd project
+        run: cp -R project/* .
 
       - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
         uses: psolymos/heroku-docker-deploy@v1.2.2 # GitHub action name (leave it as it is).
