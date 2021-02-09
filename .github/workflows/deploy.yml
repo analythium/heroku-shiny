@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Change directory
+        run: cd project
+
       - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
         uses: psolymos/heroku-docker-deploy@v1.2.2 # GitHub action name (leave it as it is).
         with:
@@ -38,4 +41,4 @@ jobs:
 
           # Dokerfile directory.
           # For example, if you have a Dockerfile in the root of your project, leave it as follows:
-          dockerfile_directory: './project'
+          dockerfile_directory: ./
