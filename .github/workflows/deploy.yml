@@ -4,9 +4,9 @@ name: Build Shiny Docker Image and Deploy to Heroku
 on:
   push:
     branches:
-#      - main
-#      - master
-      - folder
+      - main
+      - master
+#      - folder
 
 jobs:
   build:

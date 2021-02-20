@@ -1,0 +1,37 @@
+name: Build Shiny Docker Image and Deploy to Heroku
+
+# Set here what events should trigger the action
+on:
+  push:
+    branches:
+#      - main
+#      - master
+      - folder
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker to Heroku
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          DOCKERFILE_DIRECTORY: "project"
+          DOCKERFILE_NAME: "Dockerfile"
+          DOCKER_OPTIONS: "--no-cache"
+        run: |
+          # change dir
+          cd ${DOCKERFILE_DIRECTORY}
+          # Heroku Docker registry login
+          echo ${HEROKU_API_KEY} | docker login --username=${HEROKU_EMAIL} registry.heroku.com --password-stdin
+          # build image
+          docker build --file ${DOCKERFILE_NAME} ${DOCKER_OPTIONS} --tag registry.heroku.com/${HEROKU_APP_NAME}/web .
+          # push
+          heroku container:push web --app ${HEROKU_APP_NAME}
+          # release
+          heroku container:release web --app ${HEROKU_APP_NAME}
