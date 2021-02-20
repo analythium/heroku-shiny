@@ -20,22 +20,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+#      - name: Build and push Docker to Heroku
+#        env:
+#          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+#          DOCKERFILE_DIRECTORY: "project"
+#          DOCKERFILE_NAME: "Dockerfile"
+#          DOCKER_OPTIONS: "--no-cache"
+#        run: |
+#          # change dir
+#          cd ${DOCKERFILE_DIRECTORY}
+#          # Heroku Docker registry login
+#          echo ${HEROKU_API_KEY} | docker login --username=${HEROKU_EMAIL} registry.heroku.com --password-stdin
+#          # build image
+#          docker build --file ${DOCKERFILE_NAME} ${DOCKER_OPTIONS} --tag registry.heroku.com/${HEROKU_APP_NAME}/web .
+#          # push
+#          heroku container:push web --app ${HEROKU_APP_NAME}
+#          # release
+#          heroku container:release web --app ${HEROKU_APP_NAME}
+
+      ## set appdir and app name to the job specific one
       - name: Build and push Docker to Heroku
-        env:
-          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-          DOCKERFILE_DIRECTORY: "project"
-          DOCKERFILE_NAME: "Dockerfile"
-          DOCKER_OPTIONS: "--no-cache"
-        run: |
-          # change dir
-          cd ${DOCKERFILE_DIRECTORY}
-          # Heroku Docker registry login
-          echo ${HEROKU_API_KEY} | docker login --username=${HEROKU_EMAIL} registry.heroku.com --password-stdin
-          # build image
-          docker build --file ${DOCKERFILE_NAME} ${DOCKER_OPTIONS} --tag registry.heroku.com/${HEROKU_APP_NAME}/web .
-          # push
-          heroku container:push web --app ${HEROKU_APP_NAME}
-          # release
-          heroku container:release web --app ${HEROKU_APP_NAME}
+        uses: akhileshns/heroku-deploy@v3.11.10
+        with:
+          appdir: project
+          heroku_app_name: shiny-app-folder
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          usedocker: true
