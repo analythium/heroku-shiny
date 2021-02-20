@@ -50,6 +50,17 @@ following new repository secrets:
 See the `.github/workflows/deploy.yml` file for additional options
 (`dockerfile_name`, `docker_options`, `dockerfile_directory`)
 
+### Additions
+
+The `deploy2.yml` uses bash script instead of the ts based action that did not work with multipe folders without hacks.
+
+The bash script works fine with the same secrets.
+When we deploy multiple apps from the same repo, we face the challene
+of deploying too often. But we can skip jobs based on the
+commit message including certain words, e.g. `deploy app1`.
+This way commits concerning other apps, or documentation,
+will not trigger the deploy script.
+
 ## Deployment using local Heroku CLI
 
 ### Prerequisites
