@@ -1,5 +1,5 @@
 # change here is you want to pin R version
-FROM rocker/r-base:latest
+FROM analythium/r-shiny:4.0.3
 
 # change maintainer here
 LABEL maintainer="Peter Solymos <peter@analythium.io>"
