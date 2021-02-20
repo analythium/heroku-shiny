@@ -20,12 +20,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Edit app name and dir as needed, email and api key should apply to
+      # multiple apps from the same repo
 #      - name: Build and push Docker to Heroku
 #        env:
+#          HEROKU_APP_NAME: shiny-app-folder
+#          DOCKERFILE_DIRECTORY: "project"
 #          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 #          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-#          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-#          DOCKERFILE_DIRECTORY: "project"
 #          DOCKERFILE_NAME: "Dockerfile"
 #          DOCKER_OPTIONS: "--no-cache"
 #        run: |
