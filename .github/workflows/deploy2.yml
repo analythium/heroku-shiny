@@ -14,7 +14,7 @@ jobs:
   app1:
     runs-on: ubuntu-latest
     # commit message needs to contain 'deploy app' to trigger job
-    if: "contains(github.event.head_commit.message, 'deploy app1')"
+#    if: "contains(github.event.head_commit.message, 'deploy app1')"
     steps:
 
       - name: Checkout
