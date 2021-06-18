@@ -32,15 +32,15 @@ observe({
 
 The following deployment options are explained here:
 
-- [Using GitHub actions](#using-github-actions)
-- [Using local Heroku CLI](#using-local-heroku-cli)
+- [Using GitHub actions](#deployment-using-github-actions)
+- [Using local Heroku CLI](#deployment-using-local-heroku-cli)
 
 ## Deployment using GitHub actions
 
 Log into Heroku, in the dashboard, click on 'New' then select 'Create new App'.
 Give a name (e.g. `shiny-cicd`, if available, this will create the app at https://shiny-cicd.herokuapp.com/) to the app and create the app.
 
-Got to the Settings tab of the repo, scrolld down to Secrets and add the
+Got to the Settings tab of the repo, scroll down to Secrets and add the
 following new repository secrets:
 
 - `HEROKU_EMAIL`: your Heroku email
@@ -67,7 +67,7 @@ will not trigger the deploy script.
 
 - Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 - R & Shiny
-- Docker Engine installed & a Docker Hub account
+- Docker Engine installed
 
 ### Building Docker Images with heroku.yml
 
