@@ -1,45 +1,25 @@
 name: Build Shiny Docker Image and Deploy to Heroku
 
-# Set here what events should trigger the action
 on:
   push:
     branches:
       - main
       - master
-#      - folder
-
 jobs:
-  build:
+  deploy:
+    name: Build and deploy Shiny app
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Change directory
-        #run: cd project
-        run: cp -R project/* .
-
-      - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
-        uses: psolymos/heroku-docker-deploy@v1.2.2 # GitHub action name (leave it as it is).
+      - name: Build and push Docker to Heroku
+        uses: akhileshns/heroku-deploy@v3.11.10
         with:
-
-          # The email address associated with your Heroku account.
-          email: ${{ secrets.HEROKU_EMAIL }}
-
-          # Heroku API key associated with provided user's email.
-          # Api Key is available under your Heroku account settings.
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-
-          # Name of the heroku application to which the build is to be sent.
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-
-          # Dokerfile name. Optional, by default will be set to "Dockerfile".
-          dockerfile_name: Dockerfile
-
-          # Additional options of docker build command. (Optional)
-          docker_options: "--no-cache"
-
-          # Dokerfile directory.
-          # For example, if you have a Dockerfile in the root of your project, leave it as follows:
-          dockerfile_directory: ./
+          # app directory needs to be set relative to root of repo
+          appdir: "."
+          # this is the Heroku app name you already set up in dashboard
+          heroku_app_name: evalue-main
+          # secrets need to be added to the GitHub repo settings
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          usedocker: true # don't change this

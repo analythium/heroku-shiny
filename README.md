@@ -52,10 +52,9 @@ See the `.github/workflows/deploy.yml` file for additional options
 
 ### Additions
 
-The `deploy2.yml` uses bash script instead of the ts based action that did not work with multipe folders without hacks.
-
+The `deploy2.yml` uses bash script commented out to show what is going on.
 The bash script works fine with the same secrets.
-When we deploy multiple apps from the same repo, we face the challene
+When we deploy multiple apps from the same repo, we face the challenge
 of deploying too often. But we can skip jobs based on the
 commit message including certain words, e.g. `deploy app1`.
 This way commits concerning other apps, or documentation,
